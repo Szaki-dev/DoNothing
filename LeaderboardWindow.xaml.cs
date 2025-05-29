@@ -55,33 +55,6 @@ namespace DoNothing
             }
         }
 
-        private void RefreshButton_Click(object sender, RoutedEventArgs e)
-        {
-            LoadScores();
-        }
-
-        private void ClearButton_Click(object sender, RoutedEventArgs e)
-        {
-            var result = MessageBox.Show("Are you sure you want to clear all scores? This cannot be undone!",
-                                       "Confirm Clear", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-
-            if (result == MessageBoxResult.Yes)
-            {
-                try
-                {
-                    File.WriteAllText(LeaderboardFile, string.Empty);
-                    LoadScores();
-                    MessageBox.Show("All scores have been cleared.", "Cleared",
-                                  MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error clearing scores: {ex.Message}", "Error",
-                                  MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-        }
-
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
