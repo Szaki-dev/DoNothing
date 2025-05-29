@@ -159,11 +159,9 @@ namespace DoNothing
             var elapsed = DateTime.Now - gameStartTime;
             double finalScore = elapsed.TotalSeconds;
 
-            MessageBox.Show($"Game Over!\nYou lasted {finalScore:F1} seconds!",
-                          "Game Over", MessageBoxButton.OK, MessageBoxImage.Information);
-            
 
-            AddToLeaderboard(finalScore);
+            Ending endingWindow = new Ending(finalScore);
+            endingWindow.ShowDialog();
 
             StartButton.IsEnabled = true;
             LeaderboardButton.IsEnabled = true;
@@ -173,25 +171,6 @@ namespace DoNothing
                 GameCanvas.Children.Remove(btn);
             }
             distractionButtons.Clear();
-        }
-
-        private void AddToLeaderboard(double score)
-        {
-            string playerName = string.Empty;
-            while (string.IsNullOrWhiteSpace(playerName))
-            {
-                playerName = Interaction.InputBox("Enter your name for the leaderboard:", "Leaderboard Entry", "Player");
-            }
-            try
-            {
-                string scoreEntry = $"{playerName};{score:F1}";
-                File.AppendAllText(LeaderboardFile, scoreEntry + Environment.NewLine);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error saving score: {ex.Message}", "Error",
-                              MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
         }
 
         private void LoadLeaderboard()
