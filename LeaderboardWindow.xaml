@@ -39,7 +39,6 @@
             </ListBox>
         </Border>
 
-        <!-- Controls -->
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" 
                     Margin="20">
             <Button Name="CloseButton" Content="Back" Click="BackButton_Click" 
